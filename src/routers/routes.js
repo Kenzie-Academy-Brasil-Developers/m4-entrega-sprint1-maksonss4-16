@@ -43,7 +43,7 @@ userRouter.get(
 userRouter.patch(
   "/users/:uuid",
   verifyAuthTokenMiddleware,
-  checkEmailInUseMiddleware,
+  // checkEmailInUseMiddleware,
   validateSerializerMiddleware(updateUserSerializer),
   updateUserController
 );

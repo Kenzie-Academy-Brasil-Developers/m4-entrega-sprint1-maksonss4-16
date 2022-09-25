@@ -1,6 +1,7 @@
 import { users } from "../../database";
+import { userWithOutPasswordSerializer } from "../../serializers";
 
-export function updateUserService(uuid, updateUser) {
+export async function updateUserService(uuid, updateUser) {
   const userIndex = users.findIndex((user) => user.uuid === uuid);
 
   if (userIndex === -1) {
@@ -9,5 +10,7 @@ export function updateUserService(uuid, updateUser) {
 
   users[userIndex] = { ...users[userIndex], ...updateUser };
 
-  return users[userIndex];
+  return await userWithOutPasswordSerializer.validate(users[userIndex], {
+    stripUnknown: true,
+  });
 }
