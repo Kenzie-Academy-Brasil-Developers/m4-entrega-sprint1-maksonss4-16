@@ -1,8 +1,12 @@
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 
-export function checkIsTokenFromAdmin(req, res, next) {
+export function verifyAuthTokenMiddleware(req, res, next) {
   let token = req.headers.authorization;
+
+  if (!token) {
+    return res.status(401).json({ message: "Missing authorization headers" });
+  }
 
   token = token.split(" ")[1];
   //"Bearer <token>"
@@ -12,9 +16,9 @@ export function checkIsTokenFromAdmin(req, res, next) {
     if (error) {
       return res.status(401).json({ message: "Invalid Token." });
     }
-    if (!decoded.user.isAdm) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
+
+    req.owner_id = decoded.sub;
+    req.tokenIsAdm = decoded.user.isAdm;
     next();
   });
 }

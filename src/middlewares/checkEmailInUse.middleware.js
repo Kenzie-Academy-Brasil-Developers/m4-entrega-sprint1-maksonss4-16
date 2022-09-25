@@ -1,6 +1,6 @@
 import { users } from "../database";
 
-export function checkEmailInUse(req, res, next) {
+export function checkEmailInUseMiddleware(req, res, next) {
   const { email } = req.body;
   const isEmailInUse = users.find((user) => user.email === email);
 

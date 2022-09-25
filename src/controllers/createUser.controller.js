@@ -1,9 +1,7 @@
-import { createUserService } from "../services/createUsers.service";
+import { createUserService } from "../services/users/createUsers.service";
 
 export async function createUserController(req, res) {
-  const { name, email, password, isAdm } = req.body;
-
-  const user = await createUserService(name, email, password, isAdm);
-
-  return res.json(user);
+  const user = req.validatedBody;
+  const createdUser = await createUserService(user);
+  return res.status(201).json(createdUser);
 }

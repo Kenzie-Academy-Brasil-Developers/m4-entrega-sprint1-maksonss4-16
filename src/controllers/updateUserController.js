@@ -1,9 +1,9 @@
-import { deleteUserService } from "../services/users/deleteUser.service";
+import { updateUserService } from "../services/users/updateUser.service";
 
-export function deleteUserController(req, res) {
+export function updateUserController(req, res) {
   const { uuid } = req.params;
   if (req.tokenIsAdm || uuid === req.owner_id) {
-    const updateUser = deleteUserService(uuid);
+    const updateUser = updateUserService(uuid, req.validatedBody);
     return res.status(200).json(updateUser);
   }
 
