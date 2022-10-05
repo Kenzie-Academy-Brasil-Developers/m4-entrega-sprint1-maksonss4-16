@@ -19,7 +19,7 @@ import {
 export const userRouter = Router();
 userRouter.post(
   "/users",
-  checkEmailInUseMiddleware,
+  // checkEmailInUseMiddleware,
   validateSerializerMiddleware(createUserSerializer),
   createUserController
 );

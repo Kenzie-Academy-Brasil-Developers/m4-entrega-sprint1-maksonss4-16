@@ -1,6 +1,6 @@
 import { listUsersService } from "../services/users/listUsers.service";
 
-export function listUsersController(req, res) {
-  const users = listUsersService();
+export async function listUsersController(req, res) {
+  const users = await listUsersService();
   return res.status(200).json(users);
 }

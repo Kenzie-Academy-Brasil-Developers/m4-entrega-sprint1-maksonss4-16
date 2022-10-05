@@ -9,12 +9,12 @@ export const createUserSerializer = yup.object().shape({
     .string()
     .transform((recievedValue) => bcrypt.hashSync(recievedValue, 10))
     .required(),
-  isAdm: yup.boolean().required(),
-  createdOn: yup
+  is_adm: yup.boolean().required(),
+  created_on: yup
     .date()
     .default(() => new Date())
     .notRequired(),
-  updatedOn: yup
+  updated_on: yup
     .date()
     .default(() => new Date())
     .notRequired(),
@@ -28,9 +28,9 @@ export const createUserSerializer = yup.object().shape({
 export const userWithOutPasswordSerializer = yup.object().shape({
   name: yup.string().notRequired(),
   email: yup.string().email().notRequired(),
-  isAdm: yup.boolean().notRequired(),
-  createdOn: yup.date().notRequired(),
-  updatedOn: yup.date().notRequired(),
+  is_adm: yup.boolean().notRequired(),
+  created_on: yup.date().notRequired(),
+  updated_on: yup.date().notRequired(),
   uuid: yup.string().notRequired(),
 });
 
@@ -46,7 +46,7 @@ export const updateUserSerializer = yup.object().shape({
     .string()
     .transform((recievedValue) => bcrypt.hashSync(recievedValue, 10))
     .notRequired(),
-  updatedOn: yup
+  updated_on: yup
     .date()
     .transform(() => new Date())
     .default(() => new Date())

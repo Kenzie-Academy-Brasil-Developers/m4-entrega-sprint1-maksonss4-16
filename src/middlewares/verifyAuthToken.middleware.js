@@ -18,7 +18,7 @@ export function verifyAuthTokenMiddleware(req, res, next) {
     }
 
     req.owner_id = decoded.sub;
-    req.tokenIsAdm = decoded.user.isAdm;
+    req.tokenIsAdm = decoded.user.is_adm;
     next();
   });
 }
